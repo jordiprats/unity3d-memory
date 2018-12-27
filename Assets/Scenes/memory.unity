@@ -1399,7 +1399,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.9607843, g: 0, b: 0, a: 1}
-        key1: {r: 0.9607843, g: 0.03137255, b: 0.03137255, a: 0.40392157}
+        key1: {r: 0.9607843, g: 0.03137255, b: 0.03137255, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
@@ -5207,6 +5207,7 @@ MonoBehaviour:
   llista_gameobjs: []
   llista_alumnes: 
   llista_cartes: 
+  flipping: 0
 --- !u!1 &2004232467
 GameObject:
   m_ObjectHideFlags: 0
@@ -6493,7 +6494,7 @@ ParticleSystem:
       maxGradient:
         serializedVersion: 2
         key0: {r: 0.9607843, g: 0, b: 0, a: 1}
-        key1: {r: 0.972549, g: 0.023529412, b: 0.023529412, a: 0.6784314}
+        key1: {r: 0.972549, g: 0.023529412, b: 0.023529412, a: 1}
         key2: {r: 0, g: 0, b: 0, a: 0}
         key3: {r: 0, g: 0, b: 0, a: 0}
         key4: {r: 0, g: 0, b: 0, a: 0}
