@@ -4,8 +4,6 @@ using UnityEngine;
 
 public class FlipController : MonoBehaviour {
 
-	public bool flipping=false;
-
 	public bool blocked=false;
 	private bool faceup=false;
 
@@ -15,21 +13,20 @@ public class FlipController : MonoBehaviour {
 
 	public void FlipCard()
 	{
-		if(flipping)
+		if(((MemoryController)GameObject.Find("screen").GetComponent(typeof(MemoryController))).flipping)
 		{
 			Debug.Log("delayed flip: "+this.name);
-			StartCoroutine(wait_for_flip());
 		}
 		else
 		{
-			StartCoroutine(flip());
 			Debug.Log("flipping "+this.name);
 		}
+		StartCoroutine(wait_for_flip());
 	}
 
 	IEnumerator wait_for_flip()
 	{
-		while(flipping)
+		while( ((MemoryController)GameObject.Find("screen").GetComponent(typeof(MemoryController))).flipping )
 		{
 			yield return new WaitForSeconds(0.01f);
 		}
@@ -41,7 +38,7 @@ public class FlipController : MonoBehaviour {
 		bool done = false;
 		if(!this.blocked)
 		{
-			flipping = true;
+			((MemoryController)GameObject.Find("screen").GetComponent(typeof(MemoryController))).flipping = true;
 
 			while(!done)
 			{
@@ -61,7 +58,7 @@ public class FlipController : MonoBehaviour {
 			}
 
 			faceup=!faceup;
-			flipping=false;
+			((MemoryController)GameObject.Find("screen").GetComponent(typeof(MemoryController))).flipping=false;
 		}
 	}
 }

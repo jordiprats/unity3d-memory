@@ -20,6 +20,8 @@ public class MemoryController : MonoBehaviour {
 
 	public int[] llista_cartes;
 
+	public bool flipping=false;
+
 	// random generator
 	System.Random rnd;
 
@@ -222,15 +224,7 @@ public class MemoryController : MonoBehaviour {
 		FlipController hit_flip_controller;
 		FlipController selected_flip_controller;
 
-		
-		int flipping_counter=0;
-		for (int i = 0; i < this.llista_gameobjs.Length; i++)
-		{
-			if(((FlipController)(llista_gameobjs[i].GetComponent(typeof(FlipController)))).flipping)
-				flipping_counter++;
-		}
-
-		if(Input.GetMouseButton(0) && flipping_counter==0)
+		if(Input.GetMouseButton(0) && !flipping)
 		{
 			var inputPosition = Camera.main.ScreenToWorldPoint(Input.mousePosition);
 			RaycastHit2D[] touches = Physics2D.RaycastAll(inputPosition, inputPosition, 0.5f);

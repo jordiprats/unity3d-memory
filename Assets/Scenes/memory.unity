@@ -4950,7 +4950,6 @@ GameObject:
   - component: {fileID: 1347845893}
   - component: {fileID: 1347845892}
   - component: {fileID: 1347845891}
-  - component: {fileID: 1347845894}
   m_Layer: 0
   m_Name: Main Camera
   m_TagString: MainCamera
@@ -5018,24 +5017,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1347845894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1347845890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae90daa4bbe2f4268aa7f7fe15989826, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  fotos: []
-  noms: []
-  backs: []
-  llista_sprites: []
-  llista_gameobjs: []
-  llista_alumnes: 
-  llista_cartes: 
 --- !u!1 &1570286567
 GameObject:
   m_ObjectHideFlags: 0
@@ -5125,6 +5106,7 @@ GameObject:
   - component: {fileID: 1976234151}
   - component: {fileID: 1976234150}
   - component: {fileID: 1976234152}
+  - component: {fileID: 1976234154}
   m_Layer: 0
   m_Name: screen
   m_TagString: Untagged
@@ -5207,6 +5189,24 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0, y: 0}
+--- !u!114 &1976234154
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1976234149}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae90daa4bbe2f4268aa7f7fe15989826, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  fotos: []
+  noms: []
+  backs: []
+  llista_sprites: []
+  llista_gameobjs: []
+  llista_alumnes: 
+  llista_cartes: 
 --- !u!1 &2004232467
 GameObject:
   m_ObjectHideFlags: 0
