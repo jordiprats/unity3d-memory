@@ -36,11 +36,20 @@ public class MemoryController : MonoBehaviour {
 
 	ParticleSystem win_particles;
 
+	Text hit_txt;
+	Text selected_txt;
+
 	// Use this for initialization
 	void Start () 
 	{
 		width = Screen.currentResolution.width;
 		height = Screen.currentResolution.height;
+
+		hit_txt = (Text)GameObject.Find("hit").GetComponent(typeof(Text));
+		selected_txt = (Text)GameObject.Find("selected").GetComponent(typeof(Text));
+
+		hit_txt.enabled=Application.isEditor;
+		selected_txt.enabled=Application.isEditor;
 
 		Debug.Log("screen: w" + width + "h" + height);
 
@@ -212,9 +221,6 @@ public class MemoryController : MonoBehaviour {
 	{
 		FlipController hit_flip_controller;
 		FlipController selected_flip_controller;
-
-		Text hit_txt = (Text)GameObject.Find("hit").GetComponent(typeof(Text));
-		Text selected_txt = (Text)GameObject.Find("selected").GetComponent(typeof(Text));
 
 		
 		int flipping_counter=0;
