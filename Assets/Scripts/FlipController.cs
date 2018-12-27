@@ -25,7 +25,6 @@ public class FlipController : MonoBehaviour {
 			StartCoroutine(flip());
 			Debug.Log("flipping "+this.name);
 		}
-
 	}
 
 	IEnumerator wait_for_flip()

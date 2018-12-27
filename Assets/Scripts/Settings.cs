@@ -4,7 +4,7 @@ using UnityEngine;
 
 public static class Settings
 {
-    private static int cards = 5;
+    private static int cards = 7;
 
     public static int Cards
     {

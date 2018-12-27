@@ -34,6 +34,7 @@ public class MemoryController : MonoBehaviour {
 
 	bool flip_selected=false;
 
+	ParticleSystem win_particles;
 
 	// Use this for initialization
 	void Start () 
@@ -44,6 +45,7 @@ public class MemoryController : MonoBehaviour {
 		Debug.Log("screen: w" + width + "h" + height);
 
 		cardHolder = GameObject.Find("CardHolder");
+		win_particles = (ParticleSystem)GameObject.Find("win_particles").GetComponent(typeof(ParticleSystem));
 
 		left_padding = width/3;
 		top_padding = height/8;
@@ -270,6 +272,17 @@ public class MemoryController : MonoBehaviour {
 								selected_flip_controller.blocked=true;
 								hit_flip_controller = (FlipController)hit.transform.gameObject.GetComponent(typeof(FlipController));
 								hit_flip_controller.blocked=true;
+
+								//check win condition
+								int blocked_counter=0;
+								for (int i = 0; i < this.llista_gameobjs.Length; i++)
+								{
+									if(((FlipController)(llista_gameobjs[i].GetComponent(typeof(FlipController)))).blocked)
+										blocked_counter++;
+								}
+								if(blocked_counter==this.llista_gameobjs.Length)
+									win_particles.Play();
+
 							}
 							else
 							{
