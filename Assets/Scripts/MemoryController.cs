@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class MemoryController : MonoBehaviour {
 
@@ -281,7 +282,7 @@ public class MemoryController : MonoBehaviour {
 										blocked_counter++;
 								}
 								if(blocked_counter==this.llista_gameobjs.Length)
-									win_particles.Play();
+									StartCoroutine(WinMode());
 
 							}
 							else
@@ -310,5 +311,12 @@ public class MemoryController : MonoBehaviour {
 		{
 			flip_selected=false;
 		}
+	}
+
+	IEnumerator WinMode()
+	{
+		win_particles.Play();
+		yield return new WaitForSeconds(10.0f);
+		SceneManager.LoadScene(SceneManager.GetActiveScene().name);
 	}
 }
