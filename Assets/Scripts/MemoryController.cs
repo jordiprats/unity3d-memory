@@ -236,20 +236,23 @@ public class MemoryController : MonoBehaviour {
 					{
 						if(!flip_selected)
 						{
-							Debug.Log("seleccionat "+hit.transform.gameObject.name);
-							selected_item = hit.transform.gameObject;
-							flip_selected=true;
+							if(!((FlipController)hit.transform.gameObject.GetComponent(typeof(FlipController))).blocked)
+							{
+								Debug.Log("seleccionat "+hit.transform.gameObject.name);
+								selected_item = hit.transform.gameObject;
+								flip_selected=true;
 
-							selected_flip_controller = (FlipController)selected_item.GetComponent(typeof(FlipController));
-							selected_flip_controller.FlipCard();
+								selected_flip_controller = (FlipController)selected_item.GetComponent(typeof(FlipController));
+								selected_flip_controller.FlipCard();
 
-							selected_txt.text = selected_item.name;
+								selected_txt.text = selected_item.name;
+							}
 						}
 						else Debug.Log("skipped select");
 					}
 					else
 					{
-						if(hit.transform.position!=selected_item.transform.position)
+						if(hit.transform.position!=selected_item.transform.position && !((FlipController)hit.transform.gameObject.GetComponent(typeof(FlipController))).blocked)
 						{
 							Debug.Log(hit.transform.gameObject.name+" <> "+selected_item.name);
 							Debug.Log(hit.transform.gameObject.transform.position+" <> "+selected_item.transform.position);
@@ -263,19 +266,23 @@ public class MemoryController : MonoBehaviour {
 							{
 								Debug.Log("hit");
 								marcador_hits++;
+								selected_flip_controller = (FlipController)selected_item.GetComponent(typeof(FlipController));
+								selected_flip_controller.blocked=true;
+								hit_flip_controller = (FlipController)hit.transform.gameObject.GetComponent(typeof(FlipController));
+								hit_flip_controller.blocked=true;
 							}
 							else
 							{
 								Debug.Log("miss");
 								marcador_misses++;
 
-								//flip back selected
+								//flip back selected & hit
 								selected_flip_controller = (FlipController)selected_item.GetComponent(typeof(FlipController));
-								selected_flip_controller.FlipCard();
-
-								//flip back hit
 								hit_flip_controller = (FlipController)hit.transform.gameObject.GetComponent(typeof(FlipController));
+
+								selected_flip_controller.FlipCard();
 								hit_flip_controller.FlipCard();
+								
 							}
 
 							selected_item=null;
