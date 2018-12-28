@@ -11,6 +11,7 @@ public class MemoryController : MonoBehaviour {
     public Object[] fotos;
     public Object[] noms;
 	public Object[] backs;
+	public Object[] audio_hits;
 
 	public Object[] llista_sprites;
 
@@ -24,7 +25,7 @@ public class MemoryController : MonoBehaviour {
 	public bool flipping=false;
 
 	// random generator
-	System.Random rnd;
+	private System.Random rnd;
 
 	float width,height,left_padding, top_padding, card_height;
 	GameObject cardHolder;
@@ -42,6 +43,8 @@ public class MemoryController : MonoBehaviour {
 	Text hit_txt;
 	Text selected_txt;
 
+	AudioSource sound;
+
 	// Use this for initialization
 	void Start () 
 	{
@@ -57,7 +60,10 @@ public class MemoryController : MonoBehaviour {
 		Debug.Log("screen: w" + width + "h" + height);
 
 		cardHolder = GameObject.Find("CardHolder");
+
 		win_particles = (ParticleSystem)GameObject.Find("win_particles").GetComponent(typeof(ParticleSystem));
+
+		sound = (AudioSource)GameObject.Find("sound").GetComponent(typeof(AudioSource));
 
 		left_padding = width/3;
 		top_padding = height/8;
@@ -74,13 +80,15 @@ public class MemoryController : MonoBehaviour {
         noms = Resources.LoadAll(path: "Noms", systemTypeInstance: typeof(Sprite));
 		backs = Resources.LoadAll(path: "Backs", systemTypeInstance: typeof(Sprite));
 
+		audio_hits = Resources.LoadAll(path: "Audios", systemTypeInstance: typeof(AudioClip));
+
 		Debug.Log("level#: " + Settings.Level);
 		Debug.Log("card#: " + Settings.Cards);
 
         Debug.Log("#fotos: " + fotos.Length);
         Debug.Log("#noms: " + noms.Length);
 
-
+		Debug.Log("# audio hits: " + this.audio_hits.Length);
 
         this.llista_alumnes = new int[fotos.Length];
 
@@ -218,6 +226,11 @@ public class MemoryController : MonoBehaviour {
 			this.llista_gameobjs[i]=item;
 		}
 
+		//Un cop tenim l'entorn preparat posem el play
+		//background_sound.loop=true;
+		//background_sound.clip = (AudioClip) Resources.Load("Audios/loop_horitzo");
+		//background_sound.Play();
+
 	}
 
 	void Update () 
@@ -268,6 +281,7 @@ public class MemoryController : MonoBehaviour {
 							if(hit.transform.gameObject.name==selected_item.name)
 							{
 								Debug.Log("hit");
+								this.PlayRandomHit();
 								marcador_hits++;
 								selected_flip_controller = (FlipController)selected_item.GetComponent(typeof(FlipController));
 								selected_flip_controller.blocked=true;
@@ -311,6 +325,20 @@ public class MemoryController : MonoBehaviour {
 		{
 			flip_selected=false;
 		}
+	}
+
+	private void PlayRandomHit()
+	{
+		if(this.audio_hits.Length!=0)
+		{
+			int random_index = rnd.Next(0, this.audio_hits.Length);
+			Debug.Log("playing audio "+random_index);
+
+			sound.clip = (AudioClip)this.audio_hits[random_index];
+
+			sound.Play();
+		}
+		else Debug.Log("skipping audio");
 	}
 
 	IEnumerator WinMode()
